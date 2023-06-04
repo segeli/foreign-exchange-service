@@ -1,0 +1,30 @@
+version: "3"
+
+networks:
+  foreign-exchange-net:
+    driver: bridge
+
+services:
+  liquibase:
+    image: liquibase/liquibase:latest
+    volumes:
+      - ./../db:/liquibase/changelog
+    command: "--url=jdbc:postgresql://postgres:5432/app_foreignexchange?currentSchema=sch_foreignexchange --changeLogFile=master.changelog.xml --username=app_foreignexchange --password=qwe123 update"
+    depends_on:
+      - postgres
+    networks:
+      - foreign-exchange-net
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: app_foreignexchange
+      POSTGRES_PASSWORD: qwe123
+      POSTGRES_DB: app_foreignexchange
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    restart: on-failure
+    networks:
+      - foreign-exchange-net

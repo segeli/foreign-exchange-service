@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="utf-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="001-create-exchange-rate-table" author="segeli">
+        <createTable tableName="exchange_rate">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="source" type="TEXT"/>
+            <column name="source_amount" type="NUMBER(19,5)"/>
+            <column name="target" type="TEXT"/>
+            <column name="target_amount" type="NUMBER(19,5)"/>
+
+            <column name="created_date" type="TIMESTAMP"/>
+            <column name="updated_date" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="002-create-conversion-table" author="segeli">
+        <createTable tableName="conversion">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="source_currency" type="TEXT"/>
+            <column name="source_amount" type="NUMBER(19,5)"/>
+            <column name="target_currency" type="TEXT"/>
+            <column name="target_amount" type="NUMBER(19,5)"/>
+
+            <column name="created_date" type="TIMESTAMP"/>
+            <column name="updated_date" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

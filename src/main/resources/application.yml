@@ -1,1 +1,39 @@
+fiver:
+  api-key: 7c6e413a60ad5a20e8154c79893446c6
 
+logging:
+  level:
+    com.foreignexchange: DEBUG
+
+spring:
+  application:
+    name: foreign-exchange-service
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/app_foreignexchange}
+    username: ${SPRING_DATASOURCE_USERNAME:usr_foreignexchange}
+    password: ${SPRING_DATASOURCE_PASSWORD:qwe123}
+    tomcat:
+      validation-query-timeout: 1
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: true
+      initial-size: 2
+      min-idle: 1
+      max-idle: 4
+      max-active: 8
+      max-wait: 3000
+      min-evictable-idle-time-millis: 60000
+      log-abandoned: true
+      log-validation-errors: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        default_schema: sch_foreignexchange
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      platform: postgres

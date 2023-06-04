@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="2023-06-03 00:22" author="segeli">
+        <comment>exchange_rate grants for usr_foreignexchange schema</comment>
+        <sql>
+            <![CDATA[
+            GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE exchange_rate TO usr_foreignexchange;
+            ]]>
+        </sql>
+    </changeSet>
+
+    <changeSet id="2023-06-04 22:59" author="segeli">
+        <comment>conversion grants for usr_foreignexchange schema</comment>
+        <sql>
+            <![CDATA[
+            GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE conversion TO usr_foreignexchange;
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>
