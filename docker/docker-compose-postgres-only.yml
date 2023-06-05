@@ -28,19 +28,3 @@ services:
     restart: on-failure
     networks:
       - foreign-exchange-net
-
-  foreign-exchange-service:
-    image: segeli/foreign-exchange-service:latest
-    container_name: foreign-exchange-service-app
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/app_foreignexchange
-      - SPRING_DATASOURCE_USERNAME=usr_foreignexchange
-      - SPRING_DATASOURCE_PASSWORD=qwe123
-      - APP_PORT=8080
-      - API_KEY=7c6e413a60ad5a20e8154c79893446c6
-    networks:
-      - foreign-exchange-net
