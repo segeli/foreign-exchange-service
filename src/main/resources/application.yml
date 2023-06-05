@@ -1,3 +1,7 @@
+service:
+  openapi:
+    dev-url: http://localhost:8080
+
 fiver:
   api-key: 7c6e413a60ad5a20e8154c79893446c6
 

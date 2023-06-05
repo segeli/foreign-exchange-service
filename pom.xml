@@ -34,6 +34,7 @@
 
         <!-- Plugin Versions -->
         <maven.plugin.jacoco.version>0.8.10</maven.plugin.jacoco.version>
+        <springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
     </properties>
 
     <dependencies>
@@ -59,10 +60,17 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi-starter.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
