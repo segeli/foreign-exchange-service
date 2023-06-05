@@ -1,26 +1,71 @@
 # foreign-exchange-service
 
-# Getting Started
+You can run application with two approach.
 
-### Reference Documentation
-For further reference, please consider the following sections:
+## First approach ##
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.1.0/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.1.0/maven-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.1.0/reference/htmlsingle/#web)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/3.1.0/reference/htmlsingle/#data.sql.jpa-and-spring-data)
-* [OpenFeign](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/)
+Firstly, please change your current directory to docker inside.
 
-### Guides
-The following guides illustrate how to use some features concretely:
+> cd docker
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+Then, you should run the command below for running postgresql and liquibase on the postgresql.
 
-### Additional Links
-These additional references should also help you:
+> docker-compose -f docker-compose-postgres-only.yml up
 
-* [Declarative REST calls with Spring Cloud OpenFeign sample](https://github.com/spring-cloud-samples/feign-eureka)
+Now you can run the application.
+
+> ./mvnw spring-boot:run
+
+If you want to remove all running containers, you can use the command below.
+
+> docker-compose -f docker-compose-postgres-only.yml down -v
+
+## Second approach ##
+
+> cd docker
+
+> docker-compose up -d
+
+> docker-compose down -v
+
+### API Documentation ###
+
+http://localhost:8080/swagger-ui/index.html
+
+Conversion Capability API
+
+```bash
+curl -i -X POST \
+-H "Content-Type:application/json" \
+-d \
+'{
+    "sourceAmount": 1,
+    "sourceCurrency": "USD",
+    "targetCurrency": "TRY"
+}' \
+ 'http://localhost:8080/conversion-capability/convert'
+```
+
+Conversion Search API
+
+```bash
+curl http://localhost:8080/conversions?transactionId=f1cf34aa-fe5b-4926-82cf-f113ff969bed
+```
+
+```bash
+curl http://localhost:8080/conversions?transactionDate=2023-06-05
+```
+
+Exchange Rate API
+
+```bash
+curl http://localhost:8080/exchange-rates/USD-TRY \
+ -H "Accept: application/json"
+```
+
+This request will get an error because currency pairs has no valid pattern.
+
+```bash
+curl http://localhost:8080/exchange-rates/EEEBBB \
+ -H "Accept: application/json"
+```
